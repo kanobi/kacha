@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://bj27dw46axtu2"]
+
+[sub_resource type="Gradient" id="Gradient_frkg8"]
+resource_local_to_scene = true
+offsets = PackedFloat32Array(0, 0.377807)
+colors = PackedColorArray(0.0935333, 0.51729, 0.408761, 1, 0, 0.629484, 0, 1)
+
+[node name="Trail" type="Node"]
+
+[node name="PlayerTrail" type="Node2D" parent="." groups=["player_trail_grp"]]
+
+[node name="TrailLine" type="Line2D" parent="PlayerTrail" groups=["trail_line_grp"]]
+show_behind_parent = true
+position = Vector2(-1, 0)
+width = 16.0
+default_color = Color(0, 0.243137, 1, 1)
+gradient = SubResource("Gradient_frkg8")
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 1
+round_precision = 10

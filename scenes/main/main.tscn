@@ -1,0 +1,20 @@
+[gd_scene load_steps=6 format=3 uid="uid://bxpbey6q8kuqe"]
+
+[ext_resource type="Texture2D" uid="uid://cqbmy0jwv8kl0" path="res://img/background_02_parallax_01_mid.png" id="1_np6ke"]
+[ext_resource type="Script" path="res://scenes/main/main.gd" id="1_vg77q"]
+[ext_resource type="PackedScene" uid="uid://26qq0oh4y7pi" path="res://scenes/ship/ship.tscn" id="2_hgck7"]
+[ext_resource type="PackedScene" uid="uid://c4fpiqswdtpn2" path="res://scenes/hud/hud.tscn" id="4_rry50"]
+[ext_resource type="PackedScene" uid="uid://bj27dw46axtu2" path="res://scenes/trail/trail.tscn" id="5_iwjlo"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_vg77q")
+
+[node name="BackgroundImage" type="Sprite2D" parent="."]
+position = Vector2(913, 722)
+texture = ExtResource("1_np6ke")
+
+[node name="Ship" parent="." instance=ExtResource("2_hgck7")]
+
+[node name="Hud" parent="." instance=ExtResource("4_rry50")]
+
+[node name="Trail" parent="." instance=ExtResource("5_iwjlo")]

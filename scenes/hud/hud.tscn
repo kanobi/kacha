@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4fpiqswdtpn2"]
+
+[ext_resource type="Script" path="res://scenes/hud/HUD.gd" id="1_qytml"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 8.0
+offset_top = 1376.0
+offset_right = 48.0
+offset_bottom = 1416.0
+script = ExtResource("1_qytml")
+
+[node name="TextRows" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 70.0
+offset_bottom = 23.0
+
+[node name="Row1" type="HBoxContainer" parent="TextRows"]
+layout_mode = 2
+
+[node name="Label11" type="Label" parent="TextRows/Row1"]
+layout_mode = 2
+text = "Test"
+
+[node name="Text11" type="Label" parent="TextRows/Row1"]
+layout_mode = 2
+text = "Test"
+
+[node name="Row2" type="HBoxContainer" parent="TextRows"]
+layout_mode = 2
+
+[node name="Label21" type="Label" parent="TextRows/Row2"]
+layout_mode = 2
+text = "Test"
+
+[node name="Text21" type="Label" parent="TextRows/Row2"]
+layout_mode = 2
+text = "Test"
