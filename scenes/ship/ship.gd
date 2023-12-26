@@ -14,7 +14,6 @@ func _ready():
 	screen_size = get_viewport_rect().size
 	trail_line = get_tree().get_first_node_in_group("trail_line_grp")
 	player_trail = get_tree().get_first_node_in_group("player_trail_grp")
-	previous_position = $TrailSpawner.global_position
 
 
 func _process(delta):
@@ -43,8 +42,10 @@ func _process(delta):
 	
 	trail_line.add_point(spawner_position)
 	
-	new_segment.a = previous_position
-	new_segment.b = spawner_position
+	# To prevent small un-marked collision line at the start
+	if previous_position:
+		new_segment.a = previous_position
+		new_segment.b = spawner_position
 	new_collision_shape.shape = new_segment
 	new_collision_segment.add_child(new_collision_shape)
 	player_trail.add_child(new_collision_segment)
