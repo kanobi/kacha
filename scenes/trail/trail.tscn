@@ -2,7 +2,7 @@
 
 [sub_resource type="Gradient" id="Gradient_frkg8"]
 resource_local_to_scene = true
-offsets = PackedFloat32Array(0, 0.377807)
+offsets = PackedFloat32Array(0.410714, 0.892857)
 colors = PackedColorArray(0.0935333, 0.51729, 0.408761, 1, 0, 0.629484, 0, 1)
 
 [node name="Trail" type="Node"]
