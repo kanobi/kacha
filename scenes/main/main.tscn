@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://bxpbey6q8kuqe"]
+[gd_scene load_steps=8 format=3 uid="uid://bxpbey6q8kuqe"]
 
 [ext_resource type="Texture2D" uid="uid://cqbmy0jwv8kl0" path="res://img/background_02_parallax_01_mid.png" id="1_np6ke"]
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_vg77q"]
 [ext_resource type="PackedScene" uid="uid://26qq0oh4y7pi" path="res://scenes/ship/ship.tscn" id="2_hgck7"]
 [ext_resource type="PackedScene" uid="uid://c4fpiqswdtpn2" path="res://scenes/hud/hud.tscn" id="4_rry50"]
 [ext_resource type="PackedScene" uid="uid://bj27dw46axtu2" path="res://scenes/trail/trail.tscn" id="5_iwjlo"]
+[ext_resource type="AudioStream" uid="uid://bddo8dp4o3rlw" path="res://sound/Neon Laser Horizon.mp3" id="6_jde2b"]
+[ext_resource type="AudioStream" uid="uid://savpkl85rlkk" path="res://sound/Newer Wave.mp3" id="7_hqhuw"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_vg77q")
@@ -19,3 +21,20 @@ position = Vector2(828, 754)
 [node name="Hud" parent="." instance=ExtResource("4_rry50")]
 
 [node name="Trail" parent="." instance=ExtResource("5_iwjlo")]
+
+[node name="GameMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_hqhuw")
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_jde2b")
+volume_db = -10.0
+pitch_scale = 0.65
+autoplay = true
+
+[connection signal="death" from="Ship" to="." method="_on_ship_death"]
+[connection signal="start_game" from="Hud" to="." method="_on_hud_start_game"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]

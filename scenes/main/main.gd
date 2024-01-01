@@ -1,5 +1,7 @@
 extends Node2D
 
+var is_playing
+
 func process_hud():
 	var text_1 = 0
 	var text_2 = 0
@@ -14,9 +16,35 @@ func process_keys():
 	if Input.is_action_pressed("exit"):
 		get_tree().quit()
 
+func new_game():
+	print("new game")
+	$MenuMusic.stop()
+	$GameMusic.play()
+	$StartTimer.start()
+	
+func restart_game():
+	print("restart")
+	is_playing = false
+	$GameMusic.stop()
+	$MenuMusic.play()
+	$Hud.show_game_over()
+
 func _ready():
-	pass
+	is_playing = false
 
 func _process(delta):
+	if not is_playing:
+		return
 	process_keys()
 	process_hud()
+
+func _on_hud_start_game():
+	new_game()
+
+func _on_ship_death():
+	restart_game()
+
+func _on_start_timer_timeout():
+	print("playing")
+	is_playing = true
+	$Ship.spawn()
