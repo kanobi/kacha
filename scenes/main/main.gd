@@ -18,15 +18,15 @@ func process_keys():
 
 func new_game():
 	print("new game")
-	$MenuMusic.stop()
-	$GameMusic.play()
+	$Music/MenuMusic.stop()
+	$Music/GameMusic.play()
 	$StartTimer.start()
 	
 func restart_game():
 	print("restart")
 	is_playing = false
-	$GameMusic.stop()
-	$MenuMusic.play()
+	$Music/GameMusic.stop()
+	$Music/MenuMusic.play()
 	$Hud.show_game_over()
 
 func _ready():
