@@ -45,10 +45,10 @@ one_shot = true
 stream = ExtResource("6_jde2b")
 volume_db = -10.0
 pitch_scale = 0.65
-autoplay = true
 
 [node name="GameMusic" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("7_hqhuw")
 
-[connection signal="start_game" from="Hud" to="." method="_on_hud_start_game"]
+[connection signal="start_duo" from="Hud" to="." method="_on_hud_start_duo"]
+[connection signal="start_solo" from="Hud" to="." method="_on_hud_start_solo"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]

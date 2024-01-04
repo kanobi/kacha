@@ -1,6 +1,7 @@
 extends CanvasLayer
 
-signal start_game
+signal start_solo
+signal start_duo
 
 var end_msgs = [
 	"You've bitten more than you could chew!",
@@ -24,17 +25,29 @@ func set_text_11(label_text):
 func set_text_21(label_text):
 	$DebugInfo/TextRows/Row2/Text21.text = str(label_text)
 
+func show_game_over():
+	$CenterMessage.text = end_msgs[randi_range(0, len(end_msgs) - 1)]
+	show_menu()
+
+func show_menu():
+	$CenterMessage.show()
+	$StartSolo.show()
+	$StartDuo.show()
+
+func hide_menu():
+	$StartSolo.hide()
+	$StartDuo.hide()
+	$CenterMessage.hide()
+
 func _ready():
 	$DebugInfo/TextRows/Row1/Label11.text = "Rotation: "
 	$DebugInfo/TextRows/Row2/Label21.text = "Velocity: "
 	$CenterMessage.text = "Get ready!"
 
-func show_game_over():
-	$CenterMessage.text = end_msgs[randi_range(0, len(end_msgs) - 1)]
-	$CenterMessage.show()
-	$StartButton.show()
+func _on_start_solo_pressed():
+	hide_menu()
+	start_solo.emit()
 
-func _on_start_button_pressed():
-	$StartButton.hide()
-	$CenterMessage.hide()
-	start_game.emit()
+func _on_start_duo_pressed():
+	hide_menu()
+	start_duo.emit()

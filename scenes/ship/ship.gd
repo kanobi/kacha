@@ -26,7 +26,6 @@ func handle_death():
 	death.emit()
 	set_process(false)
 	velocity = Vector2(1, 0)
-	
 	trail_node.queue_free()
 	queue_free()
 
@@ -40,6 +39,7 @@ func update_trail():
 	
 	# Add collision
 	var new_segment = SegmentShape2D.new()
+
 	# To prevent small un-marked collision line at the start
 	if previous_position:
 		new_segment.a = previous_position
