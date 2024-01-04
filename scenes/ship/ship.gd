@@ -6,66 +6,64 @@ extends CharacterBody2D
 
 @export var trail_scene: PackedScene
 
+var player_id: int
 var trail_line: Node
-var player_trail: Node
 var trail_node: Node
-var is_alive
 var screen_size
 var previous_position
 
 signal death
 
-
 func spawn():
 	print("Spawned!")
-	is_alive = true
-	position = Vector2(828, 754)
 	trail_node = trail_scene.instantiate()
-	player_trail = trail_node.get_node("PlayerTrail")
-	trail_line = trail_node.get_node("PlayerTrail/TrailLine")
 	add_child(trail_node)
-	show()
+	trail_line = trail_node.get_node("TrailLine")
+	set_process(true)
 
 func handle_death():
 	print("Got hit!")
 	death.emit()
-	is_alive = false
+	set_process(false)
 	velocity = Vector2(1, 0)
 	
 	trail_node.queue_free()
-	previous_position = null
-	
-	hide()
+	queue_free()
 
 func update_trail():
 	var spawner_position = $TrailSpawner.global_position
 	var new_collision_segment = StaticBody2D.new()
 	var new_collision_shape = CollisionShape2D.new()
 	
+	# Draw line
 	trail_line.add_point(spawner_position)
 	
-	# To prevent small un-marked collision line at the start
+	# Add collision
 	var new_segment = SegmentShape2D.new()
+	# To prevent small un-marked collision line at the start
 	if previous_position:
 		new_segment.a = previous_position
 		new_segment.b = spawner_position
 
 	new_collision_shape.shape = new_segment
 	new_collision_segment.add_child(new_collision_shape)
-	player_trail.add_child(new_collision_segment)
+	trail_node.add_child(new_collision_segment)
 	previous_position = spawner_position
 
 func _ready():
-	hide()
-	is_alive = false
 	velocity = Vector2(0, 0)
 	screen_size = get_viewport_rect().size
 
 func _process(delta):
-	if not is_alive:
-		return
-
-	var rotation_direction = Input.get_axis("left", "right")
+	# TODO: find better way of handling input
+	var rotation_direction
+	match player_id:
+		0: 
+			rotation_direction = Input.get_axis("left", "right")
+		1:
+			rotation_direction = Input.get_axis("left1", "right1")
+		_:
+			rotation_direction = Vector2(1,1)
 	var speed_input = Input.get_axis("down", "up")
 	
 	speed += speed_input * delta * accel

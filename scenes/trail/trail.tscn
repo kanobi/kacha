@@ -7,9 +7,7 @@ colors = PackedColorArray(0.0935333, 0.51729, 0.408761, 1, 0, 0.629484, 0, 1)
 
 [node name="Trail" type="Node"]
 
-[node name="PlayerTrail" type="Node2D" parent="." groups=["player_trail_grp"]]
-
-[node name="TrailLine" type="Line2D" parent="PlayerTrail" groups=["trail_line_grp"]]
+[node name="TrailLine" type="Line2D" parent="."]
 show_behind_parent = true
 position = Vector2(-1, 0)
 width = 16.0
