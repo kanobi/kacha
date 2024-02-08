@@ -1,11 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://bj27dw46axtu2"]
+[gd_scene load_steps=3 format=3 uid="uid://bj27dw46axtu2"]
+
+[ext_resource type="Script" path="res://scenes/trail/trail.gd" id="1_p72qu"]
 
 [sub_resource type="Gradient" id="Gradient_frkg8"]
 resource_local_to_scene = true
 offsets = PackedFloat32Array(0.410714, 0.892857)
 colors = PackedColorArray(0.0935333, 0.51729, 0.408761, 1, 0, 0.629484, 0, 1)
 
-[node name="Trail" type="Node"]
+[node name="Trail" type="Node" groups=["trails"]]
+script = ExtResource("1_p72qu")
 
 [node name="TrailLine" type="Line2D" parent="."]
 show_behind_parent = true

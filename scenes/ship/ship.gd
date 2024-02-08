@@ -3,43 +3,33 @@ extends CharacterBody2D
 @export var speed = 200
 @export var accel = 75
 @export var rotation_speed = 5
-
 @export var trail_scene: PackedScene
 
 var player_id: int
-var trail_line: Node
 var trail_node: Node
 var screen_size
 var previous_position
 
-signal death
+signal death(ship)
 
 func spawn():
 	print("Spawned!")
-	trail_node = trail_scene.instantiate()
-	add_child(trail_node)
-	trail_line = trail_node.get_node("TrailLine")
 	set_process(true)
 
 func handle_death():
 	print("Got hit!")
-	death.emit()
+	death.emit(self)
 	set_process(false)
-	velocity = Vector2(1, 0)
-	trail_node.queue_free()
 	queue_free()
 
 func update_trail():
+	# print("ship update_trail()")
 	var spawner_position = $TrailSpawner.global_position
 	var new_collision_segment = StaticBody2D.new()
 	var new_collision_shape = CollisionShape2D.new()
-	
-	# Draw line
-	trail_line.add_point(spawner_position)
-	
-	# Add collision
 	var new_segment = SegmentShape2D.new()
 
+	# Add collision
 	# To prevent small un-marked collision line at the start
 	if previous_position:
 		new_segment.a = previous_position
@@ -49,8 +39,16 @@ func update_trail():
 	new_collision_segment.add_child(new_collision_shape)
 	trail_node.add_child(new_collision_segment)
 	previous_position = spawner_position
+	
+	# Draw line
+	trail_node.get_node("TrailLine").add_point(spawner_position)
 
 func _ready():
+	print("ship _ready")
+	trail_node = trail_scene.instantiate()
+	trail_node.set_trail_generator(self)
+	get_tree().get_root().add_child(trail_node)
+
 	velocity = Vector2(0, 0)
 	screen_size = get_viewport_rect().size
 
@@ -63,6 +61,7 @@ func _process(delta):
 		1:
 			rotation_direction = Input.get_axis("left1", "right1")
 		_:
+			print("ERROR: unhandled input for player_id: ", player_id)
 			rotation_direction = Vector2(1,1)
 	var speed_input = Input.get_axis("down", "up")
 	
@@ -79,5 +78,4 @@ func _process(delta):
 	if collision:
 		handle_death()
 		return
-
 	update_trail()

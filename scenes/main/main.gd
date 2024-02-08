@@ -1,11 +1,15 @@
 extends Node2D
 
 @export var music_on = false
+@export var explosion_radius = 100
+@export var trail_scene: PackedScene
 
 var amount_of_players: int
 var current_player_count: int
 var ship_scene = preload("res://scenes/ship/ship.tscn")
 
+
+# debug hud information
 func process_hud():
 	var text_1 = 0
 	var text_2 = 0
@@ -67,10 +71,62 @@ func _input(event):
 func _process(delta):
 	process_hud()
 
-func _on_ship_death():
+func _on_ship_death(ship):
+	print("main_on_ship_death.")
 	current_player_count -= 1
+	var trails = get_tree().get_nodes_in_group("trails")
+	
 	if current_player_count == 0:
+		# clear all trails	
+		for trail in trails:
+			trail.queue_free()
 		restart_game()
+		return
+	
+	# check if trails got damaged by ship's explosion
+	var ship_position = ship.position
+	for trail in trails:
+		var trail_line: Line2D = trail.get_node("TrailLine")
+		var new_cuts = {}
+		var cuts = 0
+		var new_points = []
+		var previous_skip = false
+		for i in trail_line.points.size():
+			var point = trail_line.points[i]
+			if point.distance_to(ship_position) < explosion_radius:
+				if not previous_skip:
+					if len(new_points) > 1:
+						new_cuts[cuts] = new_points.duplicate(true)
+						cuts += 1
+					new_points = []
+				previous_skip = true
+			else:
+				new_points.append(point)
+				previous_skip = false
+		if len(new_points) > 1:
+			new_cuts[cuts] = new_points.duplicate(true)
+			cuts += 1
+			new_points = []
+		
+		if new_cuts:
+			var trail_ship = trail.trail_generator
+			trail.queue_free()
+			for new_trail_points in new_cuts.values():
+				if len(new_trail_points) > 1:
+					var new_trail_node = trail_scene.instantiate()
+					var new_trail_line = new_trail_node.get_node("TrailLine")
+					for point in new_trail_points:
+						# Draw line
+						new_trail_line.add_point(point)
+						# Add collision
+						var new_collision_segment = StaticBody2D.new()
+						var new_collision_shape = CollisionShape2D.new()
+						new_collision_shape.shape = SegmentShape2D.new()
+						new_collision_shape.global_position = point
+						new_collision_segment.add_child(new_collision_shape)
+						new_trail_node.add_child(new_collision_segment)
+					get_tree().get_root().add_child(new_trail_node)
+					trail_ship.trail_node = new_trail_node
 
 func _on_start_timer_timeout():
 	print("playing a game with player count: ", amount_of_players)
