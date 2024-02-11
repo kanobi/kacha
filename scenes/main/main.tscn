@@ -35,7 +35,7 @@ position = Vector2(220, 1304)
 position = Vector2(1572, 1296)
 rotation = -1.5708
 
-[node name="Hud" parent="." instance=ExtResource("4_rry50")]
+[node name="HUD" parent="." instance=ExtResource("4_rry50")]
 
 [node name="StartTimer" type="Timer" parent="."]
 wait_time = 0.1
@@ -51,6 +51,6 @@ pitch_scale = 0.65
 [node name="GameMusic" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("7_hqhuw")
 
-[connection signal="start_duo" from="Hud" to="." method="_on_hud_start_duo"]
-[connection signal="start_solo" from="Hud" to="." method="_on_hud_start_solo"]
+[connection signal="start_duo" from="HUD" to="." method="_on_hud_start_duo"]
+[connection signal="start_solo" from="HUD" to="." method="_on_hud_start_solo"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]

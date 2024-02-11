@@ -11,6 +11,7 @@ var screen_size
 var previous_position
 
 signal death(ship)
+signal update_ship_trail(ship_trail_node, new_point, previous_point)
 
 func spawn():
 	print("Spawned!")
@@ -23,25 +24,20 @@ func handle_death():
 	queue_free()
 
 func update_trail():
-	# print("ship update_trail()")
 	var spawner_position = $TrailSpawner.global_position
-	var new_collision_segment = StaticBody2D.new()
-	var new_collision_shape = CollisionShape2D.new()
-	var new_segment = SegmentShape2D.new()
-
-	# Add collision
-	# To prevent small un-marked collision line at the start
-	if previous_position:
-		new_segment.a = previous_position
-		new_segment.b = spawner_position
-
-	new_collision_shape.shape = new_segment
-	new_collision_segment.add_child(new_collision_shape)
-	trail_node.add_child(new_collision_segment)
+	update_ship_trail.emit(
+		trail_node,
+		spawner_position,
+		previous_position
+	)
 	previous_position = spawner_position
-	
-	# Draw line
-	trail_node.get_node("TrailLine").add_point(spawner_position)
+	#var new_collision_segment = StaticBody2D.new()
+	#var new_collision_shape = CollisionShape2D.new()
+	#var new_segment = SegmentShape2D.new()
+	#new_collision_shape.shape = new_segment
+	#new_collision_segment.add_child(new_collision_shape)
+	#trail_node.add_child(new_collision_segment)
+	#trail_node.get_node("TrailLine").add_point(spawner_position)
 
 func _ready():
 	print("ship _ready")
@@ -77,5 +73,4 @@ func _process(delta):
 	position = position.clamp(Vector2.ZERO, screen_size)
 	if collision:
 		handle_death()
-		return
 	update_trail()
