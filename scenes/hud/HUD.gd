@@ -43,11 +43,3 @@ func _ready():
 	$DebugInfo/TextRows/Row1/Label11.text = "Rotation: "
 	$DebugInfo/TextRows/Row2/Label21.text = "Velocity: "
 	$CenterMessage.text = "Get ready!"
-
-func _on_start_solo_pressed():
-	hide_menu()
-	start_solo.emit()
-
-func _on_start_duo_pressed():
-	hide_menu()
-	start_duo.emit()

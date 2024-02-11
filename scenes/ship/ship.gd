@@ -31,25 +31,16 @@ func update_trail():
 		previous_position
 	)
 	previous_position = spawner_position
-	#var new_collision_segment = StaticBody2D.new()
-	#var new_collision_shape = CollisionShape2D.new()
-	#var new_segment = SegmentShape2D.new()
-	#new_collision_shape.shape = new_segment
-	#new_collision_segment.add_child(new_collision_shape)
-	#trail_node.add_child(new_collision_segment)
-	#trail_node.get_node("TrailLine").add_point(spawner_position)
 
 func _ready():
 	print("ship _ready")
 	trail_node = trail_scene.instantiate()
 	trail_node.set_trail_generator(self)
 	get_tree().get_root().add_child(trail_node)
-
 	velocity = Vector2(0, 0)
 	screen_size = get_viewport_rect().size
 
 func _process(delta):
-	# TODO: find better way of handling input
 	var rotation_direction
 	match player_id:
 		0: 

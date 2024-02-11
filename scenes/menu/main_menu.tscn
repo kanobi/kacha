@@ -1,0 +1,368 @@
+[gd_scene load_steps=4 format=3 uid="uid://dhai4ndj2csfy"]
+
+[ext_resource type="Texture2D" uid="uid://cqbmy0jwv8kl0" path="res://img/background_02_parallax_01_mid.png" id="1_oeiw2"]
+[ext_resource type="Theme" uid="uid://bxq46xyvfxgiw" path="res://misc/main_menu_theme.tres" id="2_g7h4e"]
+[ext_resource type="Script" path="res://scenes/menu/main_menu_script.gd" id="2_s3v5t"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_oeiw2")
+expand_mode = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("2_s3v5t")
+
+[node name="Main" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_g7h4e")
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Main"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Main/CenterContainer"]
+custom_minimum_size = Vector2(700, 500)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Main/CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="GameTitle" type="Label" parent="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 62
+text = "Kacha"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="ButtonPlayLocal" type="Button" parent="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Play Local"
+
+[node name="ButtonMultiplayer" type="Button" parent="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Multiplayer"
+
+[node name="ButtonSettings" type="Button" parent="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Settings"
+
+[node name="ButtonQuit" type="Button" parent="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Quit"
+
+[node name="PlayLocal" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_g7h4e")
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/PlayLocal"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/PlayLocal/CenterContainer"]
+custom_minimum_size = Vector2(700, 300)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PlayLocal/CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer1" type="VBoxContainer" parent="CanvasLayer/PlayLocal/CenterContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="LabelSettings" type="Label" parent="CanvasLayer/PlayLocal/CenterContainer/PanelContainer/MarginContainer/VBoxContainer1"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Local Game"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/PlayLocal/CenterContainer/PanelContainer/MarginContainer/VBoxContainer1"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_constants/separation = 10
+
+[node name="HSplitContainer" type="HSplitContainer" parent="CanvasLayer/PlayLocal/CenterContainer/PanelContainer/MarginContainer/VBoxContainer1/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+dragger_visibility = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/PlayLocal/CenterContainer/PanelContainer/MarginContainer/VBoxContainer1/VBoxContainer2/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 32
+text = "Players:"
+
+[node name="NumPlayers" type="SpinBox" parent="CanvasLayer/PlayLocal/CenterContainer/PanelContainer/MarginContainer/VBoxContainer1/VBoxContainer2/HSplitContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(56, 2.08165e-12)
+layout_mode = 2
+size_flags_horizontal = 0
+min_value = 1.0
+max_value = 2.0
+value = 1.0
+alignment = 1
+
+[node name="ButtonLocalPlay" type="Button" parent="CanvasLayer/PlayLocal/CenterContainer/PanelContainer/MarginContainer/VBoxContainer1/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Play"
+
+[node name="ButtonLocalBack" type="Button" parent="CanvasLayer/PlayLocal/CenterContainer/PanelContainer/MarginContainer/VBoxContainer1/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Back"
+
+[node name="Settings" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_g7h4e")
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Settings"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/Settings/CenterContainer"]
+custom_minimum_size = Vector2(700, 500)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Settings/CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer1" type="VBoxContainer" parent="CanvasLayer/Settings/CenterContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="LabelSettings" type="Label" parent="CanvasLayer/Settings/CenterContainer/PanelContainer/MarginContainer/VBoxContainer1"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/Settings/CenterContainer/PanelContainer/MarginContainer/VBoxContainer1"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="ButtonSetA" type="Button" parent="CanvasLayer/Settings/CenterContainer/PanelContainer/MarginContainer/VBoxContainer1/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Setting A"
+
+[node name="ButtonSetA2" type="Button" parent="CanvasLayer/Settings/CenterContainer/PanelContainer/MarginContainer/VBoxContainer1/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Setting A"
+
+[node name="ButtonSetA3" type="Button" parent="CanvasLayer/Settings/CenterContainer/PanelContainer/MarginContainer/VBoxContainer1/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Setting A"
+
+[node name="ButtonSetA4" type="Button" parent="CanvasLayer/Settings/CenterContainer/PanelContainer/MarginContainer/VBoxContainer1/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Setting A"
+
+[node name="ButtonBack" type="Button" parent="CanvasLayer/Settings/CenterContainer/PanelContainer/MarginContainer/VBoxContainer1/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Back"
+
+[node name="ShowEndGame" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_g7h4e")
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/ShowEndGame"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/ShowEndGame/CenterContainer"]
+custom_minimum_size = Vector2(700, 500)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/ShowEndGame/CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer1" type="VBoxContainer" parent="CanvasLayer/ShowEndGame/CenterContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="LabelEndGame" type="Label" parent="CanvasLayer/ShowEndGame/CenterContainer/PanelContainer/MarginContainer/VBoxContainer1"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "End Game?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/ShowEndGame/CenterContainer/PanelContainer/MarginContainer/VBoxContainer1"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="ButtonQuit" type="Button" parent="CanvasLayer/ShowEndGame/CenterContainer/PanelContainer/MarginContainer/VBoxContainer1/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Quit Game"
+
+[node name="ButtonMainMenu" type="Button" parent="CanvasLayer/ShowEndGame/CenterContainer/PanelContainer/MarginContainer/VBoxContainer1/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Quit to Main Menu"
+
+[node name="ButtonResume" type="Button" parent="CanvasLayer/ShowEndGame/CenterContainer/PanelContainer/MarginContainer/VBoxContainer1/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Resume"
+
+[node name="ShowGameOver" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_g7h4e")
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/ShowGameOver"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/ShowGameOver/CenterContainer"]
+custom_minimum_size = Vector2(700, 500)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/ShowGameOver/CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer1" type="VBoxContainer" parent="CanvasLayer/ShowGameOver/CenterContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="LabelGameOver" type="Label" parent="CanvasLayer/ShowGameOver/CenterContainer/PanelContainer/MarginContainer/VBoxContainer1"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Game Over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/ShowGameOver/CenterContainer/PanelContainer/MarginContainer/VBoxContainer1"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="ButtonRestart" type="Button" parent="CanvasLayer/ShowGameOver/CenterContainer/PanelContainer/MarginContainer/VBoxContainer1/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Restart"
+
+[node name="ButtonQuit" type="Button" parent="CanvasLayer/ShowGameOver/CenterContainer/PanelContainer/MarginContainer/VBoxContainer1/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Quit Game"
+
+[node name="ButtonGameOverMenu" type="Button" parent="CanvasLayer/ShowGameOver/CenterContainer/PanelContainer/MarginContainer/VBoxContainer1/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Quit to Main Menu"
+
+[connection signal="pressed" from="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonPlayLocal" to="CanvasLayer" method="_on_button_play_local_pressed"]
+[connection signal="pressed" from="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonMultiplayer" to="CanvasLayer" method="_on_button_multiplayer_pressed"]
+[connection signal="pressed" from="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonSettings" to="CanvasLayer" method="_on_button_settings_pressed"]
+[connection signal="pressed" from="CanvasLayer/Main/CenterContainer/PanelContainer/MarginContainer/VBoxContainer/ButtonQuit" to="CanvasLayer" method="_on_button_quit_pressed"]
+[connection signal="pressed" from="CanvasLayer/PlayLocal/CenterContainer/PanelContainer/MarginContainer/VBoxContainer1/VBoxContainer2/ButtonLocalPlay" to="CanvasLayer" method="_on_button_local_play_pressed"]
+[connection signal="pressed" from="CanvasLayer/PlayLocal/CenterContainer/PanelContainer/MarginContainer/VBoxContainer1/VBoxContainer2/ButtonLocalBack" to="CanvasLayer" method="_on_button_local_back_pressed"]
+[connection signal="pressed" from="CanvasLayer/Settings/CenterContainer/PanelContainer/MarginContainer/VBoxContainer1/VBoxContainer2/ButtonBack" to="CanvasLayer" method="_on_button_back_pressed"]
+[connection signal="pressed" from="CanvasLayer/ShowEndGame/CenterContainer/PanelContainer/MarginContainer/VBoxContainer1/VBoxContainer2/ButtonQuit" to="CanvasLayer" method="_on_button_quit_pressed"]
+[connection signal="pressed" from="CanvasLayer/ShowEndGame/CenterContainer/PanelContainer/MarginContainer/VBoxContainer1/VBoxContainer2/ButtonMainMenu" to="CanvasLayer" method="_on_button_main_menu_pressed"]
+[connection signal="pressed" from="CanvasLayer/ShowEndGame/CenterContainer/PanelContainer/MarginContainer/VBoxContainer1/VBoxContainer2/ButtonResume" to="CanvasLayer" method="_on_button_resume_pressed"]
+[connection signal="pressed" from="CanvasLayer/ShowGameOver/CenterContainer/PanelContainer/MarginContainer/VBoxContainer1/VBoxContainer2/ButtonRestart" to="CanvasLayer" method="_on_button_restart_pressed"]
+[connection signal="pressed" from="CanvasLayer/ShowGameOver/CenterContainer/PanelContainer/MarginContainer/VBoxContainer1/VBoxContainer2/ButtonQuit" to="CanvasLayer" method="_on_button_quit_pressed"]
+[connection signal="pressed" from="CanvasLayer/ShowGameOver/CenterContainer/PanelContainer/MarginContainer/VBoxContainer1/VBoxContainer2/ButtonGameOverMenu" to="CanvasLayer" method="_on_button_game_over_menu_pressed"]

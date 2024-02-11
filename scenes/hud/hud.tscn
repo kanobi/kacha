@@ -97,7 +97,7 @@ theme_override_fonts/font = ExtResource("2_x2bhc")
 theme_override_font_sizes/font_size = 46
 text = "Duo"
 
-[connection signal="pressed" from="StartSolo" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="StartSolo" to="." method="_on_start_solo_pressed"]
-[connection signal="pressed" from="StartDuo" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="StartSolo" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="StartDuo" to="." method="_on_start_duo_pressed"]
+[connection signal="pressed" from="StartDuo" to="." method="_on_start_button_pressed"]

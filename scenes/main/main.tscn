@@ -3,8 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://cqbmy0jwv8kl0" path="res://img/background_02_parallax_01_mid.png" id="1_np6ke"]
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_vg77q"]
 [ext_resource type="PackedScene" uid="uid://bj27dw46axtu2" path="res://scenes/trail/trail.tscn" id="2_4k1en"]
-[ext_resource type="PackedScene" uid="uid://c4fpiqswdtpn2" path="res://scenes/hud/hud.tscn" id="4_rry50"]
 [ext_resource type="AudioStream" uid="uid://bddo8dp4o3rlw" path="res://sound/Neon Laser Horizon.mp3" id="6_jde2b"]
+[ext_resource type="PackedScene" uid="uid://dhai4ndj2csfy" path="res://scenes/menu/main_menu.tscn" id="7_2wwgl"]
 [ext_resource type="AudioStream" uid="uid://savpkl85rlkk" path="res://sound/Newer Wave.mp3" id="7_hqhuw"]
 
 [node name="Main" type="Node2D"]
@@ -35,12 +35,6 @@ position = Vector2(220, 1304)
 position = Vector2(1572, 1296)
 rotation = -1.5708
 
-[node name="HUD" parent="." instance=ExtResource("4_rry50")]
-
-[node name="StartTimer" type="Timer" parent="."]
-wait_time = 0.1
-one_shot = true
-
 [node name="Music" type="Node" parent="."]
 
 [node name="MenuMusic" type="AudioStreamPlayer" parent="Music"]
@@ -51,6 +45,4 @@ pitch_scale = 0.65
 [node name="GameMusic" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("7_hqhuw")
 
-[connection signal="start_duo" from="HUD" to="." method="_on_hud_start_duo"]
-[connection signal="start_solo" from="HUD" to="." method="_on_hud_start_solo"]
-[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
+[node name="MainMenu" parent="." instance=ExtResource("7_2wwgl")]
